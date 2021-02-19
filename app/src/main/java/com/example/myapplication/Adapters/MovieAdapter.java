@@ -14,10 +14,16 @@ import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.request.target.Target;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Movies;
 
 import java.util.List;
+
 
 //Base RV adapter is an abstract class, so implement methods
 //Display list of movies in the screen - RV
@@ -93,8 +99,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 //else imageURL = poster image
                 imageURL = movie.getPosterpath();
             }
-            
-            Glide.with(context).load(imageURL).into(ivPoster);
+
+            Glide.with(context)
+                    .load(imageURL)
+                    .placeholder(R.drawable.image_load)
+                    .into(ivPoster);
+
+            //Glide.with(context).load(imageURL).into(ivPoster);
+        }
+
         }
     }
-}
