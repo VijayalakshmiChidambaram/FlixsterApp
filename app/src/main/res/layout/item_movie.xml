@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:background="#FFE3C4">
 
     <ImageView
         android:id="@+id/ivPoster"
@@ -28,7 +29,7 @@
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="269dp"
-        android:layout_height="179dp"
+        android:layout_height="220dp"
         android:layout_below="@+id/tvTitle"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="4dp"
