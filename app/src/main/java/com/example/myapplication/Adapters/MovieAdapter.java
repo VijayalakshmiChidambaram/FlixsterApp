@@ -1,7 +1,9 @@
 package com.example.myapplication.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Movie;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.request.target.Target;
-import com.example.myapplication.MainActivity;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Movies;
 
 import java.util.List;
 
-
 //Base RV adapter is an abstract class, so implement methods
 //Display list of movies in the screen - RV
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+
     //Key details to fill in the methods
     //Context - where the adapter is being constructed from : Find that
     Context context;
@@ -70,8 +69,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     //To implement Adapter, first define ViewHolder class
     //Viewholder is the representation of the row in UI
-    public class ViewHolder extends RecyclerView.ViewHolder{
-    //Get reference to each of the components in the view as we bind data appropriately in each part
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        //Get reference to each of the components in the view as we bind data appropriately in each part
         //Define member variables for each view in teh ViewHolder
 
         ImageView ivPoster;
@@ -84,7 +83,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             ivPoster = itemView.findViewById(R.id.ivPoster);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
-    }
+        }
+
         //Get getter method to populate each of these views
         public void bind(Movies movie) {
             tvTitle.setText(movie.getTitle());
@@ -105,8 +105,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     .placeholder(R.drawable.image_load)
                     .into(ivPoster);
 
-            //Glide.with(context).load(imageURL).into(ivPoster);
         }
-
-        }
+    }
     }
