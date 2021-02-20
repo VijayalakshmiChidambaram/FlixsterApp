@@ -15,6 +15,8 @@ public class Movies {
     String title;
     String overview;
     String backdropPath;
+    Double vote_rating;
+
 
     //Constructor to take JSON object to construct a movie object
     public Movies(JSONObject jsonObject) throws JSONException
@@ -25,6 +27,7 @@ public class Movies {
         posterpath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
+        vote_rating = jsonObject.getDouble("vote_average");
     }
     //Method to return list of movies from JSONArray
     //Takes in from JSONArray (Actual data we got back from DB)
@@ -57,5 +60,10 @@ public class Movies {
 
     public String getOverview() {
         return overview;
+    }
+
+    public Double getVote_rating()
+    {
+        return vote_rating;
     }
 }
