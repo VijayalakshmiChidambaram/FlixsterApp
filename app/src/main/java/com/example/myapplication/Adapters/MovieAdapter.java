@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,11 +70,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     //To implement Adapter, first define ViewHolder class
-    //Viewholder is the representation of the row in UI
+    //Viewholder is the representation of the row in UI. Hold the references to each row of the element in the RV
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Get reference to each of the components in the view as we bind data appropriately in each part
         //Define member variables for each view in teh ViewHolder
 
+        RelativeLayout container;
         ImageView ivPoster;
         TextView tvTitle;
         TextView tvOverview;
@@ -83,6 +86,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             ivPoster = itemView.findViewById(R.id.ivPoster);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
+            container = itemView.findViewById(R.id.container);
         }
 
         //Get getter method to populate each of these views
@@ -105,6 +109,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     .placeholder(R.drawable.image_load)
                     .into(ivPoster);
 
+            //1) Register a click listener on whole row (On click will take to next screen)
+            //2) Navigate to a new activity on tap
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,movie.getTitle(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
     }
