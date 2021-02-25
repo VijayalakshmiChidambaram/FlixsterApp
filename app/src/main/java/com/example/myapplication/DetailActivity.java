@@ -27,6 +27,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     //% d- Movie ID will be passed for the list of movies
     public static final String VIDEOS_URL ="https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
+
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
@@ -54,7 +55,8 @@ public class DetailActivity extends YouTubeBaseActivity {
 
         //Make a request to the Video_URL defined for the list of movies
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(String.format(VIDEOS_URL, 209112), new JsonHttpResponseHandler() {
+        //Get the movie ID from the movie object
+        client.get(String.format(VIDEOS_URL, movie.getMovieID()), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 try {
@@ -66,6 +68,8 @@ public class DetailActivity extends YouTubeBaseActivity {
                     else {
                         String youtubeKey = results.getJSONObject(0).getString("key");
                         Log.d("DetailActivity", youtubeKey);
+                        //Initialize YouTube only after the success of youtubekey
+                        initializeYouTube(youtubeKey);
                     }
                 } catch (JSONException e) {
                     Log.e("DetailActivity", "Failed to parse JSON", e);
@@ -77,6 +81,10 @@ public class DetailActivity extends YouTubeBaseActivity {
 
             }
         });
+
+    }
+
+    private void initializeYouTube(final String youtubeKey) {
         //Parse JSON reponse and extract the YouTube key
 
         //Display Video - We send request to YouTube API to play YouTube videos in android app
@@ -85,7 +93,7 @@ public class DetailActivity extends YouTubeBaseActivity {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("DetailActivity", "onInitializationSuccess");
-                youTubePlayer.cueVideo("5xVh-7ywKpE");
+                youTubePlayer.cueVideo(youtubeKey);
             }
 
             @Override
@@ -93,7 +101,6 @@ public class DetailActivity extends YouTubeBaseActivity {
                 Log.d("DetailActivity", "onInitializationFailure");
             }
         });
-
     }
 }
 

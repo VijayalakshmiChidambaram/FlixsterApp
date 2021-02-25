@@ -15,6 +15,7 @@ public class Movies {
     String overview;
     String backdropPath;
     Double vote_rating;
+    int movieID;
 
     // empty constructor needed by the Parceler library
     public Movies()
@@ -30,6 +31,7 @@ public class Movies {
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         vote_rating = jsonObject.getDouble("vote_average");
+        movieID = jsonObject.getInt("id");
     }
     //Method to return list of movies from JSONArray
     //Takes in from JSONArray (Actual data we got back from DB)
@@ -67,5 +69,9 @@ public class Movies {
     public double getVote_rating()
     {
         return vote_rating;
+    }
+
+    public int getMovieID() {
+        return movieID;
     }
 }
