@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.myapplication.DetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Movies;
 
@@ -110,11 +111,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     .into(ivPoster);
 
             //1) Register a click listener on whole row (On click will take to next screen)
-            //2) Navigate to a new activity on tap
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,movie.getTitle(), Toast.LENGTH_SHORT).show();
+                    //2) Navigate to a new activity on tap - Using Intent
+                    Intent i = new Intent(context, DetailActivity.class);
+                    //Display items inside new activity screen
+                    //Pass whatever data we want to display in the Details activity Screen
+                    i.putExtra("title", movie.getTitle());
+                    context.startActivity(i);
                 }
             });
         }
