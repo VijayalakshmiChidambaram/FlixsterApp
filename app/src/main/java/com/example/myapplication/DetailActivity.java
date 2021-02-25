@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.myapplication.models.Movies;
+
+import org.parceler.Parcels;
+
 public class DetailActivity extends AppCompatActivity {
 
     TextView tvTitle;
@@ -24,7 +28,12 @@ public class DetailActivity extends AppCompatActivity {
         //Retrieve the data in the detail activity screen corresponding to the key
         //Display the title in the activity details xml files so we can display in the screen the data we are pulling out
         String title = getIntent().getStringExtra("title");
-        tvTitle.setText(title);
+        //Unwrap the objects passed in
+        Movies movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        tvTitle.setText(movie.getTitle());
+        tvOverview.setText(movie.getOverview());
+        //Convert Double to float, because Double has longer precision than float
+        ratingBar.setRating((float) movie.getVote_rating());
 
     }
 }

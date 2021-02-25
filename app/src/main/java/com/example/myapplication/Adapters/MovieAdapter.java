@@ -24,6 +24,9 @@ import com.example.myapplication.DetailActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Movies;
 
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
 import java.util.List;
 
 //Base RV adapter is an abstract class, so implement methods
@@ -118,7 +121,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     Intent i = new Intent(context, DetailActivity.class);
                     //Display items inside new activity screen
                     //Pass whatever data we want to display in the Details activity Screen
-                    i.putExtra("title", movie.getTitle());
+                    //Instead of sending each element ie.Title, Overview etc we can use Parcelable and send all data from movies.java into Details Activity(One activity to another)
+                    i.putExtra("movie", Parcels.wrap(movie));
                     context.startActivity(i);
                 }
             });

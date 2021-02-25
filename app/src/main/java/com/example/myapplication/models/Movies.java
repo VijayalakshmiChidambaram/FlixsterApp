@@ -1,14 +1,13 @@
 package com.example.myapplication.models;
 
-import android.graphics.Movie;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Parcel
 // Parse results into actual movies(Movie objects)
 public class Movies {
     String posterpath;
@@ -17,6 +16,9 @@ public class Movies {
     String backdropPath;
     Double vote_rating;
 
+    // empty constructor needed by the Parceler library
+    public Movies()
+    {}
 
     //Constructor to take JSON object to construct a movie object
     public Movies(JSONObject jsonObject) throws JSONException
@@ -62,7 +64,7 @@ public class Movies {
         return overview;
     }
 
-    public Double getVote_rating()
+    public double getVote_rating()
     {
         return vote_rating;
     }
