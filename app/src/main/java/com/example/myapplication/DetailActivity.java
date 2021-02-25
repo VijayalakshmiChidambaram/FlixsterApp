@@ -7,17 +7,26 @@ import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.myapplication.models.Movies;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.parceler.Parcels;
+
+import okhttp3.Headers;
 
 public class DetailActivity extends YouTubeBaseActivity {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyAEB-Ss-fu3_bqs0N7EA7ulXnP3oRZ4ewQ";
+    //% d- Movie ID will be passed for the list of movies
+    public static final String VIDEOS_URL ="https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+
     TextView tvTitle;
     TextView tvOverview;
     RatingBar ratingBar;
@@ -42,6 +51,33 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview.setText(movie.getOverview());
         //Convert Double to float, because Double has longer precision than float
         ratingBar.setRating((float) movie.getVote_rating());
+
+        //Make a request to the Video_URL defined for the list of movies
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(String.format(VIDEOS_URL, 209112), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Headers headers, JSON json) {
+                try {
+                    JSONArray results = json.jsonObject.getJSONArray("results");
+                    if (results.length() ==0)
+                    {
+                        return;
+                    }
+                    else {
+                        String youtubeKey = results.getJSONObject(0).getString("key");
+                        Log.d("DetailActivity", youtubeKey);
+                    }
+                } catch (JSONException e) {
+                    Log.e("DetailActivity", "Failed to parse JSON", e);
+                }
+            }
+
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+
+            }
+        });
+        //Parse JSON reponse and extract the YouTube key
 
         //Display Video - We send request to YouTube API to play YouTube videos in android app
         // Add YouTube jar file - Creating reference to YouTube library in this Android studio project
