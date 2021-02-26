@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.myapplication.DetailActivity;
@@ -28,6 +29,10 @@ import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.CropCircleWithBorderTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 //Base RV adapter is an abstract class, so implement methods
 //Display list of movies in the screen - RV
@@ -107,12 +112,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 //else imageURL = poster image
                 imageURL = movie.getPosterpath();
             }
-
-            Glide.with(context)
-                    .load(imageURL)
-                    .placeholder(R.drawable.image_load)
-                    .into(ivPoster);
-
+            int radius = 30; // corner radius, higher value = more rounded
+            int margin = 20; // crop margin, set to 0 for corners with no crop
+           // if (movie.getVote_rating()<5.0) {
+                Glide.with(context)
+                        .load(imageURL)
+                        .placeholder(R.drawable.image_load)
+                        .transform(new CropCircleWithBorderTransformation(radius, margin))
+                        .into(ivPoster);
+            /*}
+            else
+            {
+                MovieAdapter.this.getItemId()
+                initializeYouTube(youtubeKey);
+            }*/
             //1) Register a click listener on whole row (On click will take to next screen)
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
