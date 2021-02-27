@@ -29,6 +29,7 @@ Time spent: 16 hours spent in total (8 hours for Part 1 and 8 hours for Part 2 o
 ### App Walkthough GIF
 
 <img src="FlixsterApp2Walkthrough.gif" width=250><br>
+<img src="FlixsterApp2Walkthrough_YouTubePlayerViewFullScreen.gif" width=250><br>
 
 ### Notes
 
