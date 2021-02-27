@@ -48,7 +48,7 @@ public class DetailActivity extends YouTubeBaseActivity {
 
         //Retrieve the data in the detail activity screen corresponding to the key
         //Display the title in the activity details xml files so we can display in the screen the data we are pulling out
-        String title = getIntent().getStringExtra("title");
+       //String title = getIntent().getStringExtra("title");
         //Unwrap the objects passed in
         Movies movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
         tvTitle.setText(movie.getTitle());

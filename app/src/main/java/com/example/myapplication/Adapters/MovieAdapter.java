@@ -147,6 +147,25 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 }
             });
 
+            ivPoster.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //2) Navigate to a new activity on tap - Using Intent
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(intent);
+                }
+            });
+
+            playIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //2) Navigate to a new activity on tap - Using Intent
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
