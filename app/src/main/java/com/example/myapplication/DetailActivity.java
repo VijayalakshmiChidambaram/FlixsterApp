@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     TextView tvOverview;
     RatingBar ratingBar;
     YouTubePlayerView youTubePlayerView;
+    ImageView ivPoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview = findViewById(R.id.tvOverview);
         ratingBar = findViewById(R.id.ratingBar);
         youTubePlayerView = findViewById(R.id.player);
+        ivPoster = findViewById(R.id.ivPoster);
 
         //Retrieve the data in the detail activity screen corresponding to the key
         //Display the title in the activity details xml files so we can display in the screen the data we are pulling out
@@ -52,6 +55,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview.setText(movie.getOverview());
         //Convert Double to float, because Double has longer precision than float
         ratingBar.setRating((float) movie.getVote_rating());
+
 
         //Make a request to the Video_URL defined for the list of movies
         AsyncHttpClient client = new AsyncHttpClient();

@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +24,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.myapplication.DetailActivity;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.models.Movies;
 
@@ -88,6 +91,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         ImageView ivPoster;
         TextView tvTitle;
         TextView tvOverview;
+        ImageView playIcon;
 
         //Constructor - Define where the text view and image View are coming from
         public ViewHolder(@NonNull View itemView) {
@@ -96,6 +100,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             container = itemView.findViewById(R.id.container);
+            playIcon = itemView.findViewById(R.id.playIcon);
         }
 
         //Get getter method to populate each of these views
@@ -136,9 +141,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                     //Pass whatever data we want to display in the Details activity Screen
                     //Instead of sending each element ie.Title, Overview etc we can use Parcelable and send all data from movies.java into Details Activity(One activity to another)
                     i.putExtra("movie", Parcels.wrap(movie));
-                    context.startActivity(i);
+                   ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, ivPoster, "profile");
+                    context.startActivity(i, options.toBundle());
+                   //context.startActivity(i);
                 }
             });
+
+
         }
     }
     }

@@ -22,6 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:transitionName="profile"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -49,5 +51,19 @@
             android:maxLines="8"
             android:textSize="14sp"
             tools:text="Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds a formidable foe by the name of the Cheetah." />
+
+        <ImageView
+            android:id="@+id/playIcon"
+            android:layout_width="48dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="@+id/ivPoster"
+            android:outlineSpotShadowColor="@color/black"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="49dp"
+            android:clickable="true"
+            card_view:srcCompat="@android:drawable/ic_media_play" />
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>
